@@ -19,6 +19,7 @@ export default class MoleculeRegistry extends Router {
     console.log(`Registered module '${molecule.name}'`)
     root && console.log(`Registered as root module`)
     for (let route of molecule.routes) {
+      this.register(route)
       console.log(`Registered route '${route}'`)
     }
 

@@ -92,8 +92,8 @@ export default class Route {
   }
 
   attachHandler ({ methods = 'ALL', handler } = {}, {
-      before, after, replace
-    } = {}) {
+    before, after, replace
+  } = {}) {
     if (!handler) {
       throw getHandlerAttachError(
         'No handler given; cannot attach to route'
@@ -195,7 +195,7 @@ export default class Route {
 
     return this[handlers].filter(handler =>
       handler.methods.find(
-        handlerMethod => handlerMethod === 'ALL' || handlerMethod === handler
+        handlerMethod => handlerMethod === 'ALL' || handlerMethod === method
       )
     ).map(handler => handler.handler)
   }
