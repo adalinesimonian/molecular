@@ -4,10 +4,15 @@ function homeHandler (ctx) {
 
 module.exports = {
   name: 'core',
-  routes: {
-    home: '/'
-  },
-  register: appContext => {
-    appContext.router.all('home', homeHandler)
-  }
+  routes: [
+    {
+      route: '/',
+      handlers: [
+        {
+          methods: ['get', 'post'],
+          handler: homeHandler
+        }
+      ]
+    }
+  ]
 }

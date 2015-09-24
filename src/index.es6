@@ -1,20 +1,10 @@
 'use strict'
 
-import Router from './router'
+import MoleculeRegistry from './molecule-registry'
 
-export default class Server {
-  constructor () {
-    this.router = new Router()
-  }
-
+export default class Server extends MoleculeRegistry {
   static createServer () {
     return new Server()
-  }
-
-  use ({ name, routes, register }) {
-    if (!name || !register) {
-      throw new Error('No component provided')
-    }
   }
 
   listen () {

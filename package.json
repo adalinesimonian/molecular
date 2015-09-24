@@ -43,5 +43,7 @@
     "gulp-watch": "^4.3.5",
     "through2": "^2.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "xregexp": "^3.0.0"
+  }
 }
