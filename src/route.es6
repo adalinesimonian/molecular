@@ -55,7 +55,7 @@ export default class Route {
       throw new Error('Route must either be a regular expression or a string')
     }
 
-    if (!regex && typeof route === 'string') {
+    if (!isRegex && typeof route === 'string') {
       let routeParts = route.split('/')
       route = '^' + routeParts.map(part => {
         let escapedPart = part.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
