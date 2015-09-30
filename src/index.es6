@@ -14,13 +14,13 @@ export default class Server extends MoleculeRegistry {
     let server = http.createServer((rawReq, rawRes) => {
       let req = new WebRequest(rawReq)
       let res = new WebResponse(rawRes)
-      let route = this.getRoute(rawReq.url)
+      let route = this.getRoute(req.url)
       let handlers = route ? route.getHandlers(req.method) : []
       if (handlers.length) {
-        console.log(`${req.method} ${rawReq.url}`)
+        console.log(`${req.method} ${req.url}`)
         handlers[0]({ req, res })
       } else {
-        console.log(`${req.method} ${rawReq.url} 404`)
+        console.log(`${req.method} ${req.url} 404`)
         res.statusCode = 404
         res.send('Not found')
       }
