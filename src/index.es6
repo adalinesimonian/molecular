@@ -2,6 +2,8 @@
 
 import http from 'http'
 import MoleculeRegistry from './molecule-registry'
+import WebRequest from './request'
+import WebResponse from './response'
 
 export default class Server extends MoleculeRegistry {
   static createServer () {
@@ -9,21 +11,18 @@ export default class Server extends MoleculeRegistry {
   }
 
   listen () {
-    let server = http.createServer((req, res) => {
-      let route = this.getRoute(req.url)
-      let handlers = route ? route.getHandlers(req.method) : []
+    let server = http.createServer((rawReq, rawRes) => {
+      let req = new WebRequest(rawReq)
+      let res = new WebResponse(rawRes)
+      let route = this.getRoute(rawReq.url)
+      let handlers = route ? route.getHandlers(rawReq.method) : []
       if (handlers.length) {
-        console.log(`${req.method} ${req.url}`)
-        handlers[0]({ req, res: {
-          send (data) {
-            res.write(data)
-            res.end('')
-          }
-        } })
+        console.log(`${rawReq.method} ${rawReq.url}`)
+        handlers[0]({ req, res })
       } else {
-        console.log(`${req.method} ${req.url} 404`)
-        res.write('404')
-        res.end('')
+        console.log(`${rawReq.method} ${rawReq.url} 404`)
+        res.statusCode = 404
+        res.send('Not found')
       }
     }).on('error', err =>
       console.log(err)
