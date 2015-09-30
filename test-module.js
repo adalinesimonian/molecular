@@ -2,6 +2,10 @@ function homeHandler (ctx) {
   ctx.res.send('Hello world!')
 }
 
+function testHandler (ctx) {
+  ctx.res.send('Welcome to the test endpoint!')
+}
+
 module.exports = {
   name: 'core',
   routes: [
@@ -11,6 +15,15 @@ module.exports = {
         {
           methods: ['get', 'post'],
           handler: homeHandler
+        }
+      ]
+    },
+    {
+      route: '/test',
+      handlers: [
+        {
+          methods: ['get', 'post'],
+          handler: testHandler
         }
       ]
     }
