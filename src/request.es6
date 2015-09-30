@@ -12,4 +12,6 @@ export default class WebRequest {
 
     this[req] = request
   }
+
+  get method () { return this[req].method }
 }
