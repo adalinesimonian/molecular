@@ -45,7 +45,7 @@ export default class Router {
     )
   }
 
-  getRoute (path) {
+  match (path) {
     if (typeof path !== 'string') {
       throw new Error('path must be a string')
     }
