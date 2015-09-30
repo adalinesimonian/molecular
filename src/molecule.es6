@@ -1,6 +1,7 @@
 'use strict'
 
 import Route from './route'
+import Router from './router'
 
 const name = Symbol()
 
@@ -22,9 +23,14 @@ export default class Molecule {
     if (register && typeof register !== 'function') {
       throw new Error('Molecule register hook must be defined as a function')
     }
+    this.router = new Router()
     if (routes.length) {
       routes = routes.map(route =>
         (route instanceof Route) ? route : new Route(route))
+      for (let route of routes) {
+        this.router.register(route)
+        console.log(`Registered route '${route}'`)
+      }
     }
     this[name] = moleculeName
     this.routes = routes

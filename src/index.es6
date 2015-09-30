@@ -14,7 +14,7 @@ export default class Server extends MoleculeRegistry {
     let server = http.createServer((rawReq, rawRes) => {
       let req = new WebRequest(rawReq)
       let res = new WebResponse(rawRes)
-      let route = this.match(req.url)
+      let route = this.findMatchingRoute(req.url)
       let handlers = route ? route.getHandlers(req.method) : []
       if (handlers.length) {
         console.log(`${req.method} ${req.url}`)
